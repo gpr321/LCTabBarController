@@ -94,9 +94,20 @@
     [super layoutSubviews];
     
     CGSize size           = self.bounds.size;
-    self.imageView.frame  = CGRectMake(0, 0, size.width, size.height * self.itemImageRatio);
-    CGFloat titleY        = size.height * self.itemImageRatio + (self.itemImageRatio == 1.0f ? 100.0f : -5.0f);
-    self.titleLabel.frame = CGRectMake(0, titleY, size.width, size.height - titleY);
+    if (self.imageView.image && self.titleLabel.text.length) {
+        self.imageView.frame  = CGRectMake(0, 0, size.width, size.height * self.itemImageRatio);
+        
+        CGFloat titleY        = size.height * self.itemImageRatio + (self.itemImageRatio == 1.0f ? 100.0f : -5.0f);
+        self.titleLabel.frame = CGRectMake(0, titleY, size.width, size.height - titleY);
+    } else if (self.imageView.image) {
+        CGFloat imgW = size.width;
+        CGFloat imgH = size.height * self.itemImageRatio;
+        self.imageView.frame  = CGRectMake(0.5 * (size.width - imgW), 0.5 * (size.height - imgH), imgW, imgH);
+    } else if (self.titleLabel.text.length) {
+        self.titleLabel.frame = self.bounds;
+    }
+    
+    
     
     [self.tabBarBadge setNeedsLayout];
 }
