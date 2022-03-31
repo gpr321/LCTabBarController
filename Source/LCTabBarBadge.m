@@ -92,15 +92,19 @@
         frame.size.height = badgeH;
         self.frame = frame;
         
-    } else {
+        frame.origin.x = self.superview.bounds.size.width * 0.5 + 12.0;
+        frame.origin.y = 2.0f;
+        self.frame = frame;
         
-        frame.size.width = 12.0f;
-        frame.size.height = frame.size.width;
+    } else {
+        CGFloat itemWH = [UIScreen mainScreen].bounds.size.width * 0.0155;
+        frame.size.width = itemWH;
+        frame.size.height = itemWH;
+        
+        frame.origin.x = self.superview.bounds.size.width * 0.5 + 9;
+        frame.origin.y = 8.0;
+        self.frame = frame;
     }
-    
-    frame.origin.x = self.superview.bounds.size.width * 0.5 + 12.0;
-    frame.origin.y = 2.0f;
-    self.frame = frame;
     
     self.layer.cornerRadius = frame.size.height * 0.5;
     self.layer.masksToBounds = YES;
